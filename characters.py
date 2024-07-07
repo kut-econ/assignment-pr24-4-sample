@@ -28,5 +28,3 @@ for c in char_sorted_list:
           c.encode().hex(),
           c.encode('shift-jis').hex(),
           char_count[c],sep='/')
-
-# %%
