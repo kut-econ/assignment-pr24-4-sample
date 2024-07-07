@@ -13,7 +13,3 @@ for i,j in zip(hiragana_ord,katakana_ord):
 # %%
 with open('./melos_katakana_example.txt','w') as file:
     file.write(text.translate(trans))
-
-# %%
-for i,j in zip(hiragana_ord,katakana_ord):
-    print(chr(i),chr(j))

@@ -2,24 +2,25 @@
 # 発話部分を抽出し、ファイルに出力するPythonスクリプト
 # %%
 # ファイル読み込み
+
 with open('./melos.txt','r') as file:
     text = file.read()
 
 # %%
-# "「"記号で文字列を部分文字列のリストに分割
-# 最初の部分文字列を廃棄
+# 1. 正規表現を使わない場合
 
 talks_start = text.split('「')[1:]
-
-# %%
-# 各部分文字列を"」"記号で分割
-# 前の部分が発話部分なので、それをリストに
-talks = [s.split('」')[0] for s in talks_start]
-
-# %%
-# かぎかっこをつける
-talks_brackets = ['「' + s + '」' for s in talks]
-
-# %%
+talks = ['「' + s.split('」')[0] + '」' for s in talks_start]
 with open('./melos_dialogue_example.txt','w') as file:
-    file.write('\n'.join(talks_brackets))
+    file.write('\n'.join(talks))
+
+# %%
+# 2. 正規表現を使う方法
+
+import re
+ptn = re.compile(r'「[^」]+」')
+talks = [m.group() for m in ptn.finditer(text)]
+with open('./melos_dialogue_example2.txt','w') as file:
+    file.write('\n'.join(talks))
+
+# %%
